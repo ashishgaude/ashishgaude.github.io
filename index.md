@@ -24,6 +24,7 @@ Intern: Numinolabs Private Limited (March 2017 - June 2017)
 - Good organizational skills and task management abilities.
 
 ## Technical Skills
+
 | | |
 |-|-|
 |Framework/libraries| Angular 6.0, Serverless 3.0, React/Redux |
@@ -77,6 +78,7 @@ Product Engineer
 * Scaled the User Registration API to 10,000 users/sec. Tested the api scalability using jmeter
 
 ## Academic Qualifications
+
 | Class        | Year of Passing| College/University  | Percentage |
 |-|-|-|-|
 | BE (IT)      | June 2016 | Goa College Of Engineering |70|
