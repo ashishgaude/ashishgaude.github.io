@@ -66,7 +66,7 @@ Product Engineer
 * Worked on setting up the machine learning visual detection service as an API to be consumed by clients. Also worked on scaling this API to 1000 users. Used Azure VMSS for machine level scaling and Nginx server as a proxy to use single machine hosting the api on multiple ports for availability.
 * Refactored python agent codebase using injectables pattern.
 * Designed a shared node module and set up CI-CD for APIs deployment.
-* Worked on Pixm’s browser extensions for chrome, firefox and Edge for gathering data related to web pages along with native host integration.
+* Worked on Pixm’s browser extensions for [chrome](https://chrome.google.com/webstore/detail/pixm-phishing-protection/flomofhkchlalfciiibgbfcpolhmglai?hl=en), [firefox](https://addons.mozilla.org/en-US/firefox/addon/pixm-web/) and [Edge](https://microsoftedge.microsoft.com/addons/detail/pixm-phishing-protection/pjonomkeadiapfhaggjgjkahnbppioei) for gathering data related to web pages along with native host integration.
 * Used gulp while extension development for building, watching file changes,etc
 * Worked on Mac OSX installer and Installer plugins from scratch for packaging the software.
 * Worked on Splunk Integration for live events monitoring and visualization.
