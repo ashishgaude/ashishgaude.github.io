@@ -97,6 +97,7 @@ Product Engineer
 - Writing Blogs
 
 ## Personal Details
+
 | | |
 |-|-|
 |Date of Birth| 29th January 1995 |
