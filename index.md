@@ -1,7 +1,7 @@
 Ashish Anant Gaude
 
-Total Experience: **4 years**
-Role: **Software Developer**
+##### Total Experience: **4 years**
+##### Role: **Software Developer**
 
 ## Employment History:
 Product Delivery Engineer: Numinolabs Private Limited (June 2017 - Present)
