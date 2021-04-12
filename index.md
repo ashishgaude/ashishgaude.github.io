@@ -78,7 +78,7 @@ Product Engineer
 
 ## Academic Qualifications
 | Class        | Year of Passing| College/University  | Percentage |
-| ------------- |:-------------:| -----:| ------------------:|
+|-|-|-|-|
 | BE (IT)      | June 2016 | Goa College Of Engineering |70|
 | H.S.S.C      | June 2012      |   GVMs Smt. Nelly Joildo Aguiar Higher Secondary School |71|
 | S.S.C | June 2010      | Surashree Kesarbai Kerkar High School |87.5|
