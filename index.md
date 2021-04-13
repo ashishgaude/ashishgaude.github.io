@@ -4,7 +4,7 @@ Ashish Anant Gaude
 > 
 > Role: **Software Developer**
 > 
-> Email: <sayhi.ashishgaude@gmail.com>
+> Email: <ashishgaude@outlook.com>
 > 
 > LinkedIn: <https://www.linkedin.com/in/ashishgaude/>
 
