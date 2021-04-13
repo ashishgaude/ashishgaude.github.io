@@ -18,7 +18,7 @@ ___
 
 ## Experience Summary:
 - 1 years of experience working on AWS with NODE JS (Lambda, API gateway, DynamoDB,Elastic Beanstalk)
-- 0.6 years of experience working with Angular 6.0
+- 1 year of experience working with Angular 6.0
 - 3 years of working experience with Azure Functions along with KeyVault, Redis, SQL server, Service bus Queues, Event hubs,etc
 - 1.5 years of development experience in python
 - Google charts APIs integration.
@@ -43,22 +43,6 @@ ___
 |Database|SQL Server, DynamoDB|
 |Tools|VS code, Postman|
 |Operating Systems|Windows, Linux, OSX|
-
-## Project Work Experience
-### MyFlowZone (Fitness Portal)
-#### Description: 
-
-#### Technologies:
-HTML,CSS,Angular, NodeJS, AWS Lambda Functions, DynamoDB
-#### Role
-Angular Developer, Dev-Ops on AWS
-#### My contributions
-* POCs on aws lambda functions with API gateway
-* Google charts integration in angular application
-* Social logins integration using Node JS server hosted in Elastic BeanStalk
-* Use of Webpack for bundling
-* Use of serverless framework for Lambda Functions
-* DynamoDB and kinesis streams understanding
 
 ### Pixm (Phishing Protection Software)
 #### Description
@@ -85,6 +69,22 @@ Product Engineer
 * Wrote selenium test cases for Browser extensions.
 * Achieved API testing using Jmeter and Newman.
 * Scaled the User Registration API to 10,000 users/sec. Tested the api scalability using jmeter
+
+## Project Work Experience
+### MyFlowZone (Fitness Portal)
+#### Description: 
+
+#### Technologies:
+HTML,CSS,Angular, NodeJS, AWS Lambda Functions, DynamoDB
+#### Role
+Angular Developer, Dev-Ops on AWS
+#### My contributions
+* POCs on aws lambda functions with API gateway
+* Google charts integration in angular application
+* Social logins integration using Node JS server hosted in Elastic BeanStalk
+* Use of Webpack for bundling
+* Use of serverless framework for Lambda Functions
+* DynamoDB and kinesis streams understanding
 
 ## Academic Qualifications
 
