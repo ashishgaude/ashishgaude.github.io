@@ -3,6 +3,10 @@ Ashish Anant Gaude
 > Total Experience: **4 years**
 > 
 > Role: **Software Developer**
+> 
+> Email: <sayhi.ashishgaude@gmail.com>
+> 
+> LinkedIn: <https://www.linkedin.com/in/ashishgaude/>
 
 ___
 
