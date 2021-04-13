@@ -64,7 +64,7 @@ Angular Developer, Dev-Ops on AWS
 #### Description
 Pixm’s AI-based browser extension detects and stops credential phishing in real time right at the point-of-click — even for those phishing attacks that get past existing security. More about pixm [here](https://pixm.net/)
 #### Technologies:
-NodeJS, Python, Azure, React,Redux,Sql Server, Azure, Browser Plugins
+NodeJS, Python, Azure, React, Redux, Sql Server, Azure, Browser Plugins
 #### Role:
 Product Engineer
 #### My contributions:
@@ -88,11 +88,11 @@ Product Engineer
 
 ## Academic Qualifications
 
-| Class        | Year of Passing| College/University  | Percentage |
+|Class| Year of Passing| College/University  | Percentage |
 |-|-|-|-|
-| BE (IT)      | June 2016 | Goa College Of Engineering |70|
-| H.S.S.C      | June 2012      |   GVMs Smt. Nelly Joildo Aguiar Higher Secondary School |71|
-| S.S.C | June 2010      | Surashree Kesarbai Kerkar High School |87.5|
+|BE (IT)|June 2016|Goa College Of Engineering|70|
+|H.S.S.C|June 2012|GVMs Smt. Nelly Joildo Aguiar Higher Secondary School|71|
+|S.S.C|June 2010|Surashree Kesarbai Kerkar High School|87.5|
 
 ## Extra Projects
 - Developed a website during college time for a company: [http://opalus.org.uk/](http://opalus.org.uk/)
@@ -109,8 +109,8 @@ Product Engineer
 
 | | |
 |-|-|
-|Date of Birth| 29th January 1995 |
-| Gender | Male |
+|Date of Birth|29th January 1995|
+|Gender|Male|
 |Address|Pune|
 |Marital Status|Unmarried|
 |Languages Known|English, Hindi, Marathi, Konkani|
