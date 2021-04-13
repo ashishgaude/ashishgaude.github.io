@@ -12,7 +12,7 @@ ___
 
 
 ## Employment History:
-- Senior Product Delivery Engineer: Numinolabs Private Limited (Oct 2019 - Preset)
+- [Senior Product Delivery Engineer](https://numinolabs.com/team/ashish-gaude.html): Numinolabs Private Limited (Oct 2019 - Preset)
 - Product Delivery Engineer: Numinolabs Private Limited (June 2017 - Sept 2019)
 - Intern: Numinolabs Private Limited (March 2017 - June 2017)
 
