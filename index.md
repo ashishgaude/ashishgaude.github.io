@@ -4,7 +4,8 @@ Ashish Anant Gaude
 - Role: Software Developer
 
 ## Employment History:
-- Product Delivery Engineer: Numinolabs Private Limited (June 2017 - Present)
+- Senior Product Delivery Engineer: Numinolabs Private Limited (Oct 2019 - Preset)
+- Product Delivery Engineer: Numinolabs Private Limited (June 2017 - Sept 2019)
 - Intern: Numinolabs Private Limited (March 2017 - June 2017)
 
 ## Experience Summary:
