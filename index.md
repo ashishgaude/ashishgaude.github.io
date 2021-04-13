@@ -62,7 +62,7 @@ Angular Developer, Dev-Ops on AWS
 
 ### Pixm (Phishing Protection Software)
 #### Description
-
+Pixm’s AI-based browser extension detects and stops credential phishing in real time right at the point-of-click — even for those phishing attacks that get past existing security. More about pixm [here](https://pixm.net/)
 #### Technologies:
 NodeJS, Python, Azure, React,Redux,Sql Server, Azure, Browser Plugins
 #### Role:
