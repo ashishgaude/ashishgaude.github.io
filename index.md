@@ -87,11 +87,11 @@ Product Engineer
 | S.S.C | June 2010      | Surashree Kesarbai Kerkar High School |87.5|
 
 ## Extra Projects
-- Developed a website during college time for a company: http://opalus.org.uk/
-- Developed a water surfing website for https://www.goasurfcenter.com/
+- Developed a website during college time for a company: [http://opalus.org.uk/](http://opalus.org.uk/)
+- Developed a water surfing website for [https://www.goasurfcenter.com/](https://www.goasurfcenter.com/)
 - Worked on a prototype with WebRTC
-- Contributed to an open source cloud security project: https://cloudsploit.com
-- Continuously share my experiences on cloud platforms at my own blog: https://mycloudexperiences.blogspot.com
+- Contributed to an open source cloud security project: [https://cloudsploit.com](https://cloudsploit.com)
+- Continuously share my experiences on cloud platforms at my own blog: [https://mycloudexperiences.blogspot.com](https://mycloudexperiences.blogspot.com)
 
 ## Hobbies
 - Badminton
