@@ -1,12 +1,11 @@
 Ashish Anant Gaude
 
-Total Experience: 4 years
-
-Role: Software Developer
+- Total Experience: 4 years
+- Role: Software Developer
 
 ## Employment History:
-Product Delivery Engineer: Numinolabs Private Limited (June 2017 - Present)
-Intern: Numinolabs Private Limited (March 2017 - June 2017)
+- Product Delivery Engineer: Numinolabs Private Limited (June 2017 - Present)
+- Intern: Numinolabs Private Limited (March 2017 - June 2017)
 
 ## Experience Summary:
 - 1 years of experience working on AWS with NODE JS (Lambda, API gateway, DynamoDB,Elastic Beanstalk)
