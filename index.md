@@ -19,6 +19,7 @@ ___
 ## Experience Summary:
 - 1 years of experience working on AWS with NODE JS (Lambda, API gateway, DynamoDB,Elastic Beanstalk)
 - 1 year of experience working with Angular 6.0
+- 2 years of experience working with React
 - 3 years of working experience with Azure Functions along with KeyVault, Redis, SQL server, Service bus Queues, Event hubs,etc
 - 1.5 years of development experience in python
 - Google charts APIs integration.
