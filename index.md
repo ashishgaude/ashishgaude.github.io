@@ -22,6 +22,7 @@ ___
 - 2 years of experience working with React
 - 3 years of working experience with Azure Functions along with KeyVault, Redis, SQL server, Service bus Queues, Event hubs,etc
 - 1.5 years of development experience in python
+- Experience in using serverless infrastructure for scaling the backend to 10k+ users 
 - Google charts APIs integration.
 - Social Logins Integration.
 - CICD with GOCD and Gulp
