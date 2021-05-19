@@ -46,6 +46,7 @@ ___
 |Tools|VS code, Postman|
 |Operating Systems|Windows, Linux, OSX|
 
+## Project Work Experience
 ### Pixm (Phishing Protection Software)
 #### Description
 Pixm’s AI-based browser extension detects and stops credential phishing in real time right at the point-of-click — even for those phishing attacks that get past existing security. More about pixm [here](https://pixm.net/)
@@ -72,7 +73,6 @@ Product Engineer
 * Achieved API testing using Jmeter and Newman.
 * Scaled the User Registration API to 10,000 users/sec. Tested the api scalability using jmeter
 
-## Project Work Experience
 ### MyFlowZone (Fitness Portal)
 #### Description: 
 
