@@ -51,6 +51,7 @@ ___
 ## Project Work Experience
 ### Pixm (Phishing Protection Software)
 #### Description
+#### Duration: Current project (Working since April 2018)
 Pixm’s AI-based browser extension detects and stops credential phishing in real time right at the point-of-click — even for those phishing attacks that get past existing security. More about pixm [here](https://pixm.net/)
 #### Technologies:
 NodeJS, Python, Azure, React, Redux, Sql Server, Azure, Browser Plugins
@@ -76,6 +77,7 @@ Product Engineer
 * Scaled the User Registration API to 10,000 users/sec. Tested the api scalability using jmeter
 
 ### MyFlowZone (Fitness Portal)
+#### Duration: 13 months (3 months internship incluided) 
 #### Description: 
 
 #### Technologies:
