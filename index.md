@@ -1,12 +1,8 @@
-Ashish Anant Gaude
-
 > Total Experience: **4 years**
 > 
-> Role: **Software Developer**
+> Role: **Senior Product Delivery Engineer**
 > 
 > Email: <ashishgaude@outlook.com>
-> 
-> LinkedIn: <https://www.linkedin.com/in/ashishgaude/>
 > 
 > Phone: _+91 8805112235_
 
