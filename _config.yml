@@ -1,9 +1,6 @@
 theme: jekyll-theme-minimal
 title: Ashish Gaude
 description: Passionate Software Engineer
+  <a href="https://www.linkedin.com/in/sayashraaj/">View My LinkedIn Profile</a> 
 # logo: /profile.jpeg
 # show_downloads: true
-
-social_links:
-  github:  ashishgaude
-  linkedin: ashishgaude
