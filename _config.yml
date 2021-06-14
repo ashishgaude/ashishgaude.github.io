@@ -3,9 +3,7 @@ title: Ashish Gaude
 description: Passionate Software Engineer
 # logo: /profile.jpeg
 # show_downloads: true
-minima:
-  date_format: "%b %-d, %
-  # generate social links in footer
-  social_links:
-    github:  ashishgaude
-    linkedin: ashishgaude
+
+social_links:
+  github:  ashishgaude
+  linkedin: ashishgaude
