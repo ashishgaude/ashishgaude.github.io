@@ -73,8 +73,7 @@ Product Engineer
 * Scaled the User Registration API to 10,000 users/sec. Tested the api scalability using jmeter
 
 ### MyFlowZone (Fitness Portal)
-#### Duration: 13 months (3 months internship incluided) 
-#### Description: 
+#### Duration: 13 months (3 months internship included) 
 
 #### Technologies:
 HTML,CSS,Angular, NodeJS, AWS Lambda Functions, DynamoDB
