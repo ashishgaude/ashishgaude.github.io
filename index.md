@@ -48,7 +48,7 @@ ___
 ## Project Work Experience
 ### OxfordVR(Health)
 #### Duration: Current project (since July 2021)
-Revolutionary virtual reality platform to conquer your anxiety.
+Revolutionary virtual reality platform to conquer your anxiety. [More](https://getrey.com/)
 #### Technologies:
 NodeJS, Typescript, Postgres SQL, AWS
 #### Role:
