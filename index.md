@@ -1,4 +1,4 @@
-> Total Experience: **4 years**
+> Total Experience: **4.5 years**
 > 
 > Role: **Senior Product Delivery Engineer**
 > 
@@ -10,7 +10,8 @@ ___
 
 
 ## Employment History:
-- [Senior Product Delivery Engineer](https://numinolabs.com/team/ashish-gaude.html): Numinolabs Private Limited (Oct 2019 - Present)
+- Senior Software Engineer: Velotio Technologies (July 2021 - Present)
+- [Senior Product Delivery Engineer](https://numinolabs.com/team/ashish-gaude.html): Numinolabs Private Limited (Oct 2019 - July 2021)
 - Product Delivery Engineer: Numinolabs Private Limited (June 2017 - Sept 2019)
 - Intern: Numinolabs Private Limited (March 2017 - June 2017)
 
@@ -45,9 +46,20 @@ ___
 |Operating Systems|Windows, Linux, OSX|
 
 ## Project Work Experience
+### OxfordVR(Health)
+#### Duration: Current project (since July 2021)
+Revolutionary virtual reality platform to conquer your anxiety.
+#### Technologies:
+NodeJS, Typescript, Postgres SQL, AWS
+#### Role:
+Backend Engineer
+#### My contributions:
+* Worked on migration of the project from C# .net microservices to NodeJS application
+* Unit tested the application with Jest
+* Migrated databases from Azure to AWS postgres using AWS Data Migration Service
+
 ### Pixm (Phishing Protection Software)
-#### Description
-#### Duration: Current project (Working since April 2018)
+#### Duration: 3.3 years (April 2018 - July 2021)
 Pixm’s AI-based browser extension detects and stops credential phishing in real time right at the point-of-click — even for those phishing attacks that get past existing security. More about pixm [here](https://pixm.net/)
 #### Technologies:
 NodeJS, Python, Azure, React, Redux, Sql Server, Azure, Browser Plugins
