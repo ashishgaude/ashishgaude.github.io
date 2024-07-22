@@ -108,6 +108,7 @@ Angular Developer, Dev-Ops on AWS
 |S.S.C|June 2010|Surashree Kesarbai Kerkar High School|87.5|
 
 ## Extra Projects
+- Developed a website for browsing games during learning React 18 [https://game-hub-hazel-zeta.vercel.app/]
 - Developed a website during college time for a company: [http://opalus.org.uk/](http://opalus.org.uk/)
 - Developed a water surfing website for [https://www.goasurfcenter.com/](https://www.goasurfcenter.com/)
 - Worked on a prototype with WebRTC
