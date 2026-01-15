@@ -168,7 +168,7 @@
         <!-- Command 6: Download -->
         <div class="command-line">
             <span class="prompt"><span class="user">ashish@macbook</span>:<span class="loc">~</span>$</span>
-            <span class="cmd">sudo wget resume.pdf</span><span class="cursor"></span>
+            <span class="cmd">sudo wget resume.pdf</span>
         </div>
         <div class="output">
             <a href="javascript:window.print()" style="color: var(--highlight); text-decoration: none; border: 1px solid var(--highlight); padding: 5px 10px; border-radius: 4px;">
@@ -177,8 +177,18 @@
         </div>
 
         <br>
+        <p style="color: var(--comment); margin-bottom: 10px; font-size: 0.9em;">
+            // Type 'help' to see available commands, or just scroll up to read.
+        </p>
+
+        <!-- Interactive Input Line -->
+        <div class="command-line" id="input-line">
+            <span class="prompt"><span class="user">ashish@macbook</span>:<span class="loc">~</span>$</span>
+            <input type="text" id="terminal-input" autocomplete="off" autofocus>
+        </div>
     </div>
 </div>
 
+<script src="assets/js/main.js"></script>
 </body>
 </html>
