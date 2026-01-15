@@ -55,14 +55,29 @@ document.addEventListener('DOMContentLoaded', () => {
                 return `
                     <div style="color: var(--text-color);">
                         Available commands:<br>
-                        <span class="cmd">about</span>    - Display profile summary<br>
-                        <span class="cmd">skills</span>   - List technical skills<br>
-                        <span class="cmd">projects</span> - Show project links<br>
-                        <span class="cmd">email</span>    - Send me an email<br>
-                        <span class="cmd">clear</span>    - Clear the terminal screen<br>
-                        <span class="cmd">whoami</span>   - Current user info<br>
-                        <span class="cmd">date</span>     - Show current date<br>
-                        <span class="cmd">gui</span>      - <span style="color: #666">// coming soon (switch to normal web view)</span>
+                        <span class="cmd">about</span>      - Display profile summary<br>
+                        <span class="cmd">experience</span> - Show work history<br>
+                        <span class="cmd">skills</span>     - List technical skills<br>
+                        <span class="cmd">projects</span>   - Show project links<br>
+                        <span class="cmd">email</span>      - Send me an email<br>
+                        <span class="cmd">clear</span>      - Clear the terminal screen<br>
+                        <span class="cmd">whoami</span>     - Current user info<br>
+                        <span class="cmd">date</span>       - Show current date<br>
+                    </div>
+                `;
+            case 'experience':
+                return `
+                    <div class="job-block">
+                        <span class="job-title">Senior Software Engineer</span> @ Velotio Technologies<br>
+                        <span class="job-date">[ July 2021 - Present ]</span>
+                    </div>
+                    <div class="job-block">
+                        <span class="job-title">Senior Product Delivery Engineer</span> @ Numinolabs<br>
+                        <span class="job-date">[ Oct 2019 - July 2021 ]</span>
+                    </div>
+                    <div class="job-block">
+                        <span class="job-title">Product Delivery Engineer</span> @ Numinolabs<br>
+                        <span class="job-date">[ June 2017 - Sept 2019 ]</span>
                     </div>
                 `;
             case 'clear':
