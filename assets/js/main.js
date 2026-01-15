@@ -47,6 +47,37 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const data = {
+        profile: `
+            <div class="command-line">
+                <span class="prompt"><span class="user">ashish@macbook</span>:<span class="loc">~</span>$</span>
+                <span class="cmd">./show-profile.sh</span>
+            </div>
+            <div class="output">
+                <div class="profile-grid">
+                    <img src="profile.jpeg" alt="Ashish Gaude" class="profile-pic">
+                    <div>
+                        <h1 class="string" style="font-size: 1.8em; margin-bottom: 10px;">"Ashish Gaude"</h1>
+                        <p style="color: var(--comment);">// Senior Product Delivery Engineer</p>
+                        <p style="color: var(--comment);">// 9+ Years of Experience in Full Stack & Cloud</p>
+                        <br>
+                        <div>
+                            <span class="key">Email:</span> <a href="mailto:ashishgaude@outlook.com" class="string">"ashishgaude@outlook.com"</a><br>
+                            <span class="key">Phone:</span> <span class="number">+91 8805112235</span><br>
+                            <span class="key">Location:</span> <span class="string">"Pune, India"</span><br>
+                            <span class="key">Links:</span> 
+                            [<a href="https://www.linkedin.com/in/ashishgaude/" target="_blank">LinkedIn</a>, 
+                            <a href="https://mycloudexperiences.blogspot.com" target="_blank">Blog</a>]
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `,
+        help_hint: `
+            <br>
+            <p style="color: var(--comment); margin-bottom: 10px; font-size: 0.9em;">
+                // Type '<span style="color: var(--cmd-color);">help</span>' to see available commands or '<span style="color: var(--cmd-color);">all</span>' to see full resume.
+            </p>
+        `,
         experience: `
             <div style="margin-bottom: 20px;">
                 <span class="cmd">cat employment_history.log</span>
@@ -141,14 +172,6 @@ document.addEventListener('DOMContentLoaded', () => {
             <p><span class="key">Degree:</span> <span class="string">"BE (Information Technology)"</span></p>
             <p><span class="key">Institute:</span> Goa College Of Engineering</p>
             <p><span class="key">Year:</span> 2016</p>
-        `,
-        download: `
-             <div style="margin-bottom: 10px;">
-                <span class="cmd">sudo wget resume.pdf</span>
-            </div>
-            <a href="javascript:window.print()" style="color: var(--highlight); text-decoration: none; border: 1px solid var(--highlight); padding: 5px 10px; border-radius: 4px;">
-                <i class="fas fa-download"></i> Click to Download/Print PDF
-            </a>
         `
     };
 
@@ -168,7 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span class="cmd">projects</span>   - Show project links<br>
                         <span class="cmd">education</span>  - Show education details<br>
                         <span class="cmd">email</span>      - Send me an email<br>
-                        <span class="cmd">clear</span>      - Clear the terminal screen<br>
+                        <span class="cmd">clear</span>      - Reset the terminal<br>
                         <span class="cmd">whoami</span>     - Current user info<br>
                         <span class="cmd">date</span>       - Show current date<br>
                     </div>
@@ -179,8 +202,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 return data.experience + 
                        "<br>" + data.skills + 
                        "<br>" + data.projects + 
-                       "<br>" + data.education +
-                       "<br>" + data.download;
+                       "<br>" + data.education;
 
             case 'experience':
             case 'work':
@@ -195,15 +217,22 @@ document.addEventListener('DOMContentLoaded', () => {
             case 'education':
                 return data.education;
             
-            case 'download':
-            case 'pdf':
-                return data.download;
-
             case 'clear':
+            case 'reset':
                 // Clear everything EXCEPT the input line
                 while (terminalBody.firstChild && terminalBody.firstChild !== inputContainer) {
                     terminalBody.removeChild(terminalBody.firstChild);
                 }
+                
+                // Restore initial state (Profile + Hint)
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = data.profile + data.help_hint;
+                
+                // Append all children of tempDiv to terminalBody before inputContainer
+                while (tempDiv.firstChild) {
+                    terminalBody.insertBefore(tempDiv.firstChild, inputContainer);
+                }
+                
                 return '';
             
             case 'whoami':
