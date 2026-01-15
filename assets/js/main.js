@@ -2,10 +2,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const terminalBody = document.querySelector('.terminal-body');
     const inputContainer = document.getElementById('input-line');
     const inputField = document.getElementById('terminal-input');
+    
+    // Initialize Matrix Effect
+    let matrixEffect = null;
+    
+    // Load external script for matrix if needed, or just assume it's loaded via HTML
+    if (typeof MatrixEffect !== 'undefined') {
+        matrixEffect = new MatrixEffect();
+    }
 
-    // Focus input on click anywhere in terminal
+    // Focus input on click
     document.addEventListener('click', () => {
-        // Don't force focus if user is selecting text
         const selection = window.getSelection();
         if (selection.toString().length === 0) {
             inputField.focus();
@@ -15,13 +22,13 @@ document.addEventListener('DOMContentLoaded', () => {
     inputField.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') {
             const command = inputField.value.trim();
+            inputField.disabled = true; // Disable input while processing
             handleCommand(command);
-            inputField.value = '';
         }
     });
 
-    function handleCommand(cmd) {
-        // Create the line showing what the user just typed
+    async function handleCommand(cmd) {
+        // Create command line echo
         const cmdLine = document.createElement('div');
         cmdLine.className = 'command-line';
         cmdLine.innerHTML = `
@@ -29,21 +36,88 @@ document.addEventListener('DOMContentLoaded', () => {
             <span class="cmd" style="color: var(--text-color); font-weight: normal;">${escapeHtml(cmd)}</span>
         `;
         
-        // Insert before the input line
         terminalBody.insertBefore(cmdLine, inputContainer);
+        inputField.value = '';
 
         // Process command
-        const output = processCommand(cmd.toLowerCase());
+        const response = processCommand(cmd.toLowerCase());
         
-        if (output) {
+        if (response) {
             const outputDiv = document.createElement('div');
             outputDiv.className = 'output';
-            outputDiv.innerHTML = output;
             terminalBody.insertBefore(outputDiv, inputContainer);
+            
+            // "Type" the response
+            await typeWriterHTML(outputDiv, response);
         }
 
-        // Auto scroll to bottom
+        inputField.disabled = false;
+        inputField.focus();
         window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    // Typewriter effect that respects HTML tags
+    function typeWriterHTML(container, html) {
+        return new Promise((resolve) => {
+            // Create a temporary container to parse the HTML
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = html;
+            
+            const queue = Array.from(tempDiv.childNodes);
+            
+            function typeNode() {
+                if (queue.length === 0) {
+                    resolve();
+                    return;
+                }
+
+                const node = queue.shift();
+                
+                // If text node, type chars
+                if (node.nodeType === Node.TEXT_NODE) {
+                    const text = node.textContent;
+                    let i = 0;
+                    
+                    function typeChar() {
+                        if (i < text.length) {
+                            container.append(text.charAt(i));
+                            i++;
+                            window.scrollTo(0, document.body.scrollHeight);
+                            setTimeout(typeChar, 5); // Fast typing speed
+                        } else {
+                            typeNode();
+                        }
+                    }
+                    typeChar();
+                } else {
+                    // If element node, create it and recurse or append immediately
+                    // For complex structures like tables/lists, appending the whole block 
+                    // looks better than typing inner text recursively, 
+                    // but let's try a hybrid: clone the node empty, append it, then type into it
+                    
+                    const clone = node.cloneNode(false); // shallow clone
+                    container.appendChild(clone);
+                    
+                    // If it has children, we need to process them inside the clone
+                    if (node.childNodes.length > 0) {
+                        // We need a new recursive typer for this new container
+                        // But to keep it linear, we can't easily recurse asynchronously in this loop structure
+                        // Simpler approach: Just append non-text nodes instantly for structure, 
+                        // or better: "Stream" elements one by one with a small delay
+                        
+                        // Let's go with "Chunk Streaming" for HTML elements to ensure safety and style
+                        // Replacing the empty clone with the full node
+                        container.replaceChild(node, clone);
+                        window.scrollTo(0, document.body.scrollHeight);
+                        setTimeout(typeNode, 20); // Delay between blocks
+                    } else {
+                        setTimeout(typeNode, 20);
+                    }
+                }
+            }
+            
+            typeNode();
+        });
     }
 
     const data = {
@@ -191,12 +265,17 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span class="cmd">projects</span>   - Show project links<br>
                         <span class="cmd">education</span>  - Show education details<br>
                         <span class="cmd">email</span>      - Send me an email<br>
+                        <span class="cmd">matrix</span>     - Toggle 'The Matrix' mode<br>
                         <span class="cmd">clear</span>      - Reset the terminal<br>
-                        <span class="cmd">whoami</span>     - Current user info<br>
-                        <span class="cmd">date</span>       - Show current date<br>
                     </div>
                 `;
             
+            case 'matrix':
+                if (matrixEffect) {
+                    return matrixEffect.toggle();
+                }
+                return "Matrix effect not loaded.";
+
             case 'all':
             case 'resume':
                 return data.experience + 
@@ -224,11 +303,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     terminalBody.removeChild(terminalBody.firstChild);
                 }
                 
-                // Restore initial state (Profile + Hint)
+                // Restore initial state immediately (no typing for clear)
                 const tempDiv = document.createElement('div');
                 tempDiv.innerHTML = data.profile + data.help_hint;
                 
-                // Append all children of tempDiv to terminalBody before inputContainer
                 while (tempDiv.firstChild) {
                     terminalBody.insertBefore(tempDiv.firstChild, inputContainer);
                 }
