@@ -1,12 +1,14 @@
 :root {
-    --primary-color: #2c3e50;
-    --accent-color: #3498db;
-    --text-color: #333;
-    --text-light: #666;
-    --bg-color: #f4f7f6;
-    --card-bg: #ffffff;
-    --shadow: 0 4px 6px rgba(0,0,0,0.1);
-    --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --bg-color: #1e1e1e;
+    --term-header: #2d2d2d;
+    --text-color: #d4d4d4;
+    --prompt-user: #4ec9b0; /* Blue/Cyan */
+    --prompt-loc: #ce9178;  /* Orange/Brown */
+    --cmd-color: #dcdcaa;   /* Yellow */
+    --highlight: #569cd6;   /* Blue */
+    --comment: #6a9955;     /* Green */
+    --link: #9cdcfe;
+    --font-mono: 'Menlo', 'Monaco', 'Courier New', monospace;
 }
 
 * {
@@ -16,206 +18,174 @@
 }
 
 body {
-    font-family: var(--font-main);
-    background-color: var(--bg-color);
+    background-color: #000;
     color: var(--text-color);
-    line-height: 1.6;
-    font-size: 16px;
-}
-
-.container {
-    max-width: 1000px;
-    margin: 40px auto;
-    background: var(--card-bg);
-    box-shadow: var(--shadow);
-    display: grid;
-    grid-template-columns: 300px 1fr;
+    font-family: var(--font-mono);
+    line-height: 1.5;
+    font-size: 15px;
+    padding: 20px;
     min-height: 100vh;
 }
 
-/* Sidebar */
-.sidebar {
-    background: var(--primary-color);
-    color: #fff;
-    padding: 30px;
+.terminal-window {
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: var(--bg-color);
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    overflow: hidden;
+    border: 1px solid #333;
+}
+
+/* Terminal Title Bar */
+.terminal-header {
+    background-color: var(--term-header);
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #333;
+}
+
+.dots {
+    display: flex;
+    gap: 8px;
+    margin-right: 15px;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.red { background-color: #ff5f56; }
+.yellow { background-color: #ffbd2e; }
+.green { background-color: #27c93f; }
+
+.title {
+    color: #999;
+    font-size: 0.85rem;
+    flex-grow: 1;
     text-align: center;
 }
 
-.profile-img {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 4px solid #fff;
-    margin-bottom: 20px;
+/* Terminal Content */
+.terminal-body {
+    padding: 20px;
+    overflow-x: hidden;
 }
 
-.sidebar h1 {
-    font-size: 1.5rem;
-    margin-bottom: 5px;
-}
-
-.sidebar h2 {
-    font-size: 1rem;
-    font-weight: 400;
-    opacity: 0.9;
-    margin-bottom: 20px;
-}
-
-.contact-info {
-    text-align: left;
-    margin-top: 30px;
-    font-size: 0.9rem;
-}
-
-.contact-item {
+/* Command Prompt Styling */
+.command-line {
+    margin-top: 25px;
     margin-bottom: 15px;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
 }
 
-.contact-item i {
+.prompt {
     margin-right: 10px;
-    width: 20px;
+    white-space: nowrap;
 }
 
-.contact-item a {
-    color: #fff;
-    text-decoration: none;
-}
-
-.skills-section {
-    text-align: left;
-    margin-top: 40px;
-}
-
-.section-title-side {
-    font-size: 1.1rem;
-    border-bottom: 1px solid rgba(255,255,255,0.2);
-    padding-bottom: 10px;
-    margin-bottom: 15px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.skill-tag {
+.user { color: var(--prompt-user); font-weight: bold; }
+.loc { color: var(--prompt-loc); font-weight: bold; }
+.cmd { color: var(--cmd-color); font-weight: bold; }
+.cursor {
     display: inline-block;
-    background: rgba(255,255,255,0.1);
-    padding: 4px 8px;
-    border-radius: 4px;
-    margin: 0 5px 5px 0;
-    font-size: 0.85rem;
-}
-
-/* Main Content */
-.main-content {
-    padding: 40px;
-}
-
-.section {
-    margin-bottom: 40px;
-}
-
-.section-title {
-    color: var(--primary-color);
-    font-size: 1.5rem;
-    border-bottom: 2px solid var(--accent-color);
-    padding-bottom: 10px;
-    margin-bottom: 20px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.timeline-item {
-    margin-bottom: 25px;
-    position: relative;
-    padding-left: 20px;
-    border-left: 2px solid var(--accent-color);
-}
-
-.timeline-item::before {
-    content: '';
-    position: absolute;
-    left: -6px;
-    top: 0;
-    width: 10px;
-    height: 10px;
-    background: var(--accent-color);
-    border-radius: 50%;
-}
-
-.job-title {
-    font-weight: 700;
-    font-size: 1.1rem;
-    color: var(--primary-color);
-}
-
-.company {
-    font-weight: 600;
-    color: var(--text-light);
-}
-
-.date {
-    font-size: 0.9rem;
-    color: var(--text-light);
-    font-style: italic;
-    margin-bottom: 10px;
-}
-
-.job-desc ul {
-    list-style-position: inside;
+    width: 8px;
+    height: 18px;
+    background-color: var(--text-color);
+    animation: blink 1s step-end infinite;
+    vertical-align: middle;
     margin-left: 5px;
 }
 
-.job-desc li {
-    margin-bottom: 5px;
+@keyframes blink { 50% { opacity: 0; } }
+
+/* Output Styling */
+.output {
+    padding-left: 20px;
+    margin-bottom: 20px;
+    color: var(--text-color);
 }
 
-.project-item {
-    margin-bottom: 30px;
+a { color: var(--link); text-decoration: none; border-bottom: 1px dotted var(--link); }
+a:hover { border-bottom: 1px solid var(--link); }
+
+/* JSON/Code Styling Helpers */
+.key { color: #9cdcfe; }
+.string { color: #ce9178; }
+.number { color: #b5cea8; }
+.boolean { color: #569cd6; }
+.bracket { color: #da70d6; }
+
+/* Profile Section */
+.profile-grid {
+    display: flex;
+    gap: 20px;
+    align-items: start;
+    flex-wrap: wrap;
 }
 
-.project-title {
-    font-weight: 700;
-    font-size: 1.1rem;
-    margin-bottom: 5px;
+.profile-pic {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 2px solid #444;
 }
 
-.tech-stack {
-    font-size: 0.85rem;
-    color: var(--accent-color);
-    margin-bottom: 10px;
-    font-weight: 600;
+/* List Styling */
+ul { list-style: none; }
+li { margin-bottom: 5px; position: relative; padding-left: 15px; }
+li::before { content: '>'; color: var(--comment); position: absolute; left: 0; font-weight: bold; }
+
+/* Experience Block */
+.job-block {
+    margin-bottom: 25px;
+    border-left: 2px solid #333;
+    padding-left: 15px;
 }
 
-.btn-download {
+.job-title { color: var(--highlight); font-weight: bold; font-size: 1.1em; }
+.company-name { color: var(--prompt-user); }
+.job-date { color: #666; font-size: 0.9em; margin-bottom: 8px; }
+
+/* Skills Tags */
+.skill-tag {
     display: inline-block;
-    margin-top: 20px;
-    padding: 10px 20px;
-    background: var(--accent-color);
-    color: #fff;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background 0.3s;
+    border: 1px solid #444;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin: 0 5px 5px 0;
+    font-size: 0.9em;
+    color: var(--number);
 }
 
-.btn-download:hover {
-    background: #2980b9;
+/* Print Styles */
+@media print {
+    body { background-color: #fff; color: #000; padding: 0; }
+    .terminal-window { box-shadow: none; border: none; max-width: 100%; }
+    .terminal-header { display: none; }
+    .prompt { display: none; }
+    .command-line { 
+        border-bottom: 2px solid #000; 
+        margin-top: 30px; 
+        display: block; 
+    }
+    .cmd::before { content: "Section: "; font-weight: normal; color: #666; }
+    .cmd { color: #000; font-size: 1.2em; text-transform: uppercase; }
+    .output { padding-left: 0; color: #000; }
+    .job-block { border-left: 2px solid #ccc; }
+    .job-title, .company-name, .string, .key { color: #000 !important; }
+    a { color: #000; text-decoration: underline; border: none; }
+    .cursor { display: none; }
+    .profile-grid { display: block; text-align: left; }
+    .profile-pic { float: right; margin: 0 0 20px 20px; border: none; }
 }
 
-@media (max-width: 768px) {
-    .container {
-        grid-template-columns: 1fr;
-        margin: 0;
-        width: 100%;
-        box-shadow: none;
-    }
-    
-    .sidebar {
-        padding: 40px 20px;
-    }
-    
-    .main-content {
-        padding: 20px;
-    }
+@media (max-width: 600px) {
+    .profile-grid { flex-direction: column; text-align: center; }
+    .profile-pic { margin: 0 auto; }
 }
