@@ -62,23 +62,59 @@ class Portfolio3D {
     }
 
     addStars() {
-        const vertices = [];
-        for (let i = 0; i < 10000; i++) {
-            const x = THREE.MathUtils.randFloatSpread(200);
-            const y = THREE.MathUtils.randFloatSpread(200);
-            const z = THREE.MathUtils.randFloatSpread(200);
-            vertices.push(x, y, z);
+        const count = 20000;
+        const positions = new Float32Array(count * 3);
+        const speeds = new Float32Array(count);
+        const colors = new Float32Array(count * 3);
+        
+        for (let i = 0; i < count; i++) {
+            positions[i * 3] = (Math.random() - 0.5) * 150;     // X
+            positions[i * 3 + 1] = (Math.random() - 0.5) * 150; // Y
+            positions[i * 3 + 2] = (Math.random() - 0.5) * 150; // Z
+            speeds[i] = 0.05 + Math.random() * 0.3;
+
+            // Green color variance
+            const greenVal = 0.5 + Math.random() * 0.5;
+            colors[i * 3] = 0;
+            colors[i * 3 + 1] = greenVal;
+            colors[i * 3 + 2] = 0;
         }
+
         const geometry = new THREE.BufferGeometry();
-        geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
-        const material = new THREE.PointsMaterial({ 
-            color: 0x00ff00, 
-            size: 0.1,
+        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+        
+        const material = new THREE.PointsMaterial({
+            size: 0.04,
+            vertexColors: true,
             transparent: true,
-            opacity: 0.5
+            opacity: 0.7,
+            blending: THREE.AdditiveBlending
         });
-        const points = new THREE.Points(geometry, material);
-        this.scene.add(points);
+
+        this.dataStream = new THREE.Points(geometry, material);
+        this.dataStream.userData = { speeds };
+        this.scene.add(this.dataStream);
+    }
+
+    updateDataStream() {
+        if (!this.dataStream) return;
+        
+        const positions = this.dataStream.geometry.attributes.position.array;
+        const speeds = this.dataStream.userData.speeds;
+        
+        for (let i = 0; i < speeds.length; i++) {
+            positions[i * 3 + 1] -= speeds[i]; // Move Y down
+            
+            // Reset to top if it goes too low
+            if (positions[i * 3 + 1] < -50) {
+                positions[i * 3 + 1] = 50;
+                positions[i * 3] = (Math.random() - 0.5) * 100;
+                positions[i * 3 + 2] = (Math.random() - 0.5) * 100;
+            }
+        }
+        
+        this.dataStream.geometry.attributes.position.needsUpdate = true;
     }
 
     addGrid() {
@@ -133,8 +169,19 @@ class Portfolio3D {
             opacity: 0.8
         });
         const mesh = new THREE.Mesh(geometry, material);
-        mesh.userData = { name: config.name };
+        mesh.userData = { name: config.name, size: config.size };
         group.add(mesh);
+
+        // Glow Layers
+        const glowGeo = new THREE.IcosahedronGeometry(config.size * 1.1, 1);
+        const glowMat = new THREE.MeshBasicMaterial({
+            color: config.color,
+            wireframe: true,
+            transparent: true,
+            opacity: 0.2
+        });
+        const glow = new THREE.Mesh(glowGeo, glowMat);
+        group.add(glow);
 
         // Outer Ring
         const ringGeo = new THREE.TorusGeometry(config.size * 1.5, 0.02, 16, 100);
@@ -145,6 +192,44 @@ class Portfolio3D {
 
         this.scene.add(group);
         this.nodes.push(mesh);
+
+        // Add Label
+        const labelSprite = this.createLabel(config.label, config.color);
+        labelSprite.position.y = config.size + 1.2;
+        group.add(labelSprite);
+    }
+
+    createLabel(text, color) {
+        const canvas = document.createElement('canvas');
+        const context = canvas.getContext('2d');
+        canvas.width = 512;
+        canvas.height = 128;
+
+        // Background for contrast (optional)
+        context.fillStyle = 'rgba(0, 0, 0, 0)'; 
+        context.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Text style
+        context.font = 'bold 80px "Menlo", "Monaco", monospace';
+        context.textAlign = 'center';
+        context.textBaseline = 'middle';
+        
+        // Shadow for "glow" look
+        context.shadowColor = `rgba(${parseInt(color.toString(16).slice(0,2), 16)}, ${parseInt(color.toString(16).slice(2,4), 16)}, ${parseInt(color.toString(16).slice(4,6), 16)}, 0.8)`;
+        context.shadowBlur = 20;
+        
+        context.fillStyle = `#${color.toString(16).padStart(6, '0')}`;
+        context.fillText(text, canvas.width / 2, canvas.height / 2);
+
+        const texture = new THREE.CanvasTexture(canvas);
+        const spriteMaterial = new THREE.SpriteMaterial({ 
+            map: texture,
+            transparent: true,
+            opacity: 0.9
+        });
+        const sprite = new THREE.Sprite(spriteMaterial);
+        sprite.scale.set(3, 0.75, 1);
+        return sprite;
     }
 
     onWindowResize() {
@@ -208,6 +293,13 @@ class Portfolio3D {
         });
     }
 
+    focusSectionByName(name) {
+        const node = this.nodes.find(n => n.userData.name === name);
+        if (node) {
+            this.focusNode(node);
+        }
+    }
+
     resetCamera() {
         gsap.to(this.camera.position, {
             x: 0,
@@ -224,6 +316,9 @@ class Portfolio3D {
     animate() {
         requestAnimationFrame(() => this.animate());
 
+        // Update Dynamic Data Stream
+        this.updateDataStream();
+
         // Smooth Rotation
         this.currentRotation.x += (this.targetRotation.x - this.currentRotation.x) * 0.05;
         this.currentRotation.y += (this.targetRotation.y - this.currentRotation.y) * 0.05;
@@ -232,9 +327,16 @@ class Portfolio3D {
         this.scene.rotation.x = this.currentRotation.x;
 
         // Animate Nodes
-        this.nodes.forEach(node => {
+        const time = Date.now() * 0.001;
+        this.nodes.forEach((node, i) => {
             node.rotation.y += 0.01;
             node.rotation.z += 0.005;
+            
+            // Floating label animation
+            const label = node.parent.children.find(c => c instanceof THREE.Sprite);
+            if (label) {
+                label.position.y = (node.userData.size || 1) + 1.2 + Math.sin(time + i) * 0.15;
+            }
             
             // Hover effect
             this.raycaster.setFromCamera(this.mouse, this.camera);

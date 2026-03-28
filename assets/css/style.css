@@ -148,6 +148,144 @@ a:hover { border-bottom: 1px solid var(--link); }
     align-items: center;
 }
 
+/* Quick Navigation HUD */
+#quick-nav {
+    position: fixed;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 200;
+}
+
+.nav-item {
+    width: 50px;
+    height: 50px;
+    background: rgba(0, 255, 0, 0.05);
+    border: 1px solid rgba(0, 255, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    border-radius: 4px;
+    backdrop-filter: blur(5px);
+}
+
+.nav-item i {
+    font-size: 1.2rem;
+    color: var(--text-color);
+    opacity: 0.6;
+}
+
+.nav-label {
+    position: absolute;
+    left: 65px;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    background: var(--text-color);
+    color: #000;
+    padding: 2px 8px;
+    opacity: 0;
+    transform: translateX(-10px);
+    pointer-events: none;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    font-weight: bold;
+}
+
+.nav-item:hover {
+    background: rgba(0, 255, 0, 0.1);
+    border-color: var(--text-color);
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+}
+
+.nav-item:hover i {
+    opacity: 1;
+}
+
+.nav-item:hover .nav-label {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.nav-item.active {
+    background: rgba(0, 255, 0, 0.2);
+    border-color: var(--text-color);
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.4);
+}
+
+.nav-item.active i {
+    opacity: 1;
+}
+
+/* Mini-Map Radar */
+#radar {
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+    width: 100px;
+    height: 100px;
+    border: 1px solid rgba(0, 255, 0, 0.3);
+    border-radius: 50%;
+    background: rgba(0, 20, 0, 0.3);
+    backdrop-filter: blur(5px);
+    z-index: 50;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+#radar-sweep {
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+    background: conic-gradient(from 0deg, rgba(0, 255, 0, 0.1) 0deg, rgba(0, 255, 0, 0) 60deg);
+    animation: sweep 4s linear infinite;
+    z-index: 1;
+}
+
+#radar-nodes {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+
+.radar-dot {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: var(--text-color);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 5px var(--text-color);
+}
+
+.radar-dot.self {
+    width: 6px;
+    height: 6px;
+    z-index: 10;
+    animation: pulse-red 1.5s infinite;
+}
+
+@keyframes pulse-red {
+    0% { box-shadow: 0 0 0 0 rgba(255, 95, 86, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(255, 95, 86, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 95, 86, 0); }
+}
+
+@keyframes sweep {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
 .spinner {
     width: 40px;
     height: 40px;

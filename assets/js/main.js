@@ -3,6 +3,61 @@ document.addEventListener('DOMContentLoaded', () => {
     const hudBody = document.getElementById('hud-body');
     const closeHud = document.getElementById('close-hud');
     const loader = document.getElementById('loader');
+    const quickNav = document.getElementById('quick-nav');
+    const radarNodes = document.getElementById('radar-nodes');
+
+    // Handle Quick Nav Clicks
+    quickNav.addEventListener('click', (e) => {
+        const item = e.target.closest('.nav-item');
+        if (item) {
+            const section = item.dataset.section;
+            if (window.portfolio3d) {
+                window.portfolio3d.focusSectionByName(section);
+                highlightNav(section);
+            }
+        }
+    });
+
+    function highlightNav(name) {
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.classList.toggle('active', item.dataset.section === name);
+        });
+    }
+
+    // Radar Logic
+    function updateRadar() {
+        if (!window.portfolio3d || !window.portfolio3d.nodes) return;
+        
+        radarNodes.innerHTML = ''; // Clear dots
+        const nodes = window.portfolio3d.nodes;
+        
+        // Radar range mapping (Assume 10 units in 3D = 50px on radar)
+        nodes.forEach(node => {
+            const pos = node.parent.position;
+            const x = (pos.x / 10) * 50 + 50;
+            const z = (pos.z / 10) * 50 + 50;
+            
+            const dot = document.createElement('div');
+            dot.className = 'radar-dot';
+            dot.style.left = `${x}%`;
+            dot.style.top = `${z}%`;
+            radarNodes.appendChild(dot);
+        });
+
+        // Add Camera Dot (Self)
+        const camPos = window.portfolio3d.camera.position;
+        const camX = (camPos.x / 10) * 50 + 50;
+        const camZ = (camPos.z / 10) * 50 + 50;
+        const selfDot = document.createElement('div');
+        selfDot.className = 'radar-dot self';
+        selfDot.style.left = `${camX}%`;
+        selfDot.style.top = `${camZ}%`;
+        selfDot.style.background = '#ff5f56'; // Red for self
+        radarNodes.appendChild(selfDot);
+        
+        requestAnimationFrame(updateRadar);
+    }
+    updateRadar();
 
     const data = {
         profile: `
@@ -106,6 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Listen for node focus events from Portfolio3D
     window.addEventListener('nodeFocused', (e) => {
         const section = e.detail.name;
+        highlightNav(section);
         showSection(section);
     });
 
@@ -119,6 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     closeHud.addEventListener('click', () => {
         hud.classList.remove('active');
+        highlightNav(''); // Clear highlights
         if (window.portfolio3d) {
             window.portfolio3d.resetCamera();
         }
