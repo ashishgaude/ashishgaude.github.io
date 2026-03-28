@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ashish Gaude | Backend Engineer</title>
+    <title>Ashish Gaude | 3D Portfolio</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -13,63 +13,35 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-4P8KQGJ128');
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 </head>
-<body>
+<body class="is-3d-mode">
 
-<div class="terminal-window">
-    <div class="terminal-header">
-        <div class="dots">
-            <div class="dot red"></div>
-            <div class="dot yellow"></div>
-            <div class="dot green"></div>
-        </div>
-        <div class="title">ashish@macbook: ~/resume</div>
-    </div>
-    
-    <div class="terminal-body">
-        
-        <!-- Command 1: Profile -->
-        <div class="command-line">
-            <span class="prompt"><span class="user">ashish@macbook</span>:<span class="loc">~</span>$</span>
-            <span class="cmd">./show-profile.sh</span>
-        </div>
-        <div class="output">
-            <div class="profile-grid">
-                <img src="profile.jpeg" alt="Ashish Gaude" class="profile-pic">
-                <div>
-                    <h1 class="string" style="font-size: 1.8em; margin-bottom: 10px;">"Ashish Gaude"</h1>
-                    <p style="color: var(--comment);">// Senior Product Delivery Engineer</p>
-                    <p style="color: var(--comment);">// 9+ Years of Experience in Full Stack & Cloud</p>
-                    <br>
-                    <div>
-                        <span class="key">Email:</span> <a href="mailto:ashishgaude@outlook.com" class="string">"ashishgaude@outlook.com"</a><br>
-                        <span class="key">Phone:</span> <span class="number">+91 8805112235</span><br>
-                        <span class="key">Location:</span> <span class="string">"Pune, India"</span><br>
-                        <span class="key">Links:</span> 
-                        [<a href="https://www.linkedin.com/in/ashishgaude/" target="_blank">LinkedIn</a>, 
-                        <a href="https://mycloudexperiences.blogspot.com" target="_blank">Blog</a>]
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div id="canvas-container"></div>
 
-        <br>
-        <p style="color: var(--comment); margin-bottom: 10px; font-size: 0.9em;">
-            // Type '<span style="color: var(--cmd-color);">help</span>' to see available commands or '<span style="color: var(--cmd-color);">all</span>' to see full resume.
-        </p>
-
-        <!-- Interactive Input Line -->
-        <div class="command-line" id="input-line">
-            <span class="prompt"><span class="user">ashish@macbook</span>:<span class="loc">~</span>$</span>
-            <input type="text" id="terminal-input" autocomplete="off" autofocus>
+    <!-- HUD Overlay -->
+    <div id="hud">
+        <div id="hud-content">
+            <button id="close-hud"><i class="fas fa-times"></i></button>
+            <div id="hud-body"></div>
         </div>
     </div>
-</div>
 
-<script src="assets/js/matrix.js"></script>
-<script src="assets/js/main.js"></script>
+    <!-- Instructions Overlay -->
+    <div id="instructions">
+        <p>DRAG TO ROTATE | CLICK NODES TO EXPLORE</p>
+    </div>
+
+    <!-- Loading Screen -->
+    <div id="loader">
+        <div class="spinner"></div>
+        <p>BOOTING SYSTEM...</p>
+    </div>
+
+    <script src="assets/js/portfolio3d.js"></script>
+    <script src="assets/js/main.js"></script>
 </body>
 </html>

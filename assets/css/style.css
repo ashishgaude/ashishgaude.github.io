@@ -1,12 +1,12 @@
 :root {
-    --bg-color: #1e1e1e;
-    --term-header: #2d2d2d;
-    --text-color: #d4d4d4;
-    --prompt-user: #4ec9b0; /* Blue/Cyan */
-    --prompt-loc: #ce9178;  /* Orange/Brown */
-    --cmd-color: #dcdcaa;   /* Yellow */
-    --highlight: #569cd6;   /* Blue */
-    --comment: #6a9955;     /* Green */
+    --bg-color: #000;
+    --hud-bg: rgba(10, 10, 10, 0.85);
+    --text-color: #00ff00; /* Classic Terminal Green */
+    --prompt-user: #4ec9b0;
+    --prompt-loc: #ce9178;
+    --cmd-color: #dcdcaa;
+    --highlight: #569cd6;
+    --comment: #6a9955;
     --link: #9cdcfe;
     --font-mono: 'Menlo', 'Monaco', 'Courier New', monospace;
 }
@@ -23,182 +23,152 @@ body {
     font-family: var(--font-mono);
     line-height: 1.5;
     font-size: 15px;
-    padding: 20px;
+    overflow: hidden;
     min-height: 100vh;
 }
 
-.terminal-window {
-    max-width: 900px;
-    margin: 0 auto;
-    background-color: var(--bg-color);
-    border-radius: 8px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    overflow: hidden;
-    border: 1px solid #333;
+#canvas-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
 }
 
-/* Terminal Title Bar */
-.terminal-header {
-    background-color: var(--term-header);
-    padding: 10px 15px;
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid #333;
+/* HUD Styling */
+#hud {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    width: 90%;
+    max-width: 800px;
+    max-height: 80vh;
+    background: var(--hud-bg);
+    border: 1px solid var(--text-color);
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
+    backdrop-filter: blur(10px);
+    z-index: 100;
+    padding: 30px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    overflow-y: auto;
 }
 
-.dots {
-    display: flex;
-    gap: 8px;
-    margin-right: 15px;
+#hud.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -50%) scale(1);
 }
 
-.dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
+#close-hud {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: transparent;
+    border: 1px solid var(--text-color);
+    color: var(--text-color);
+    padding: 5px 10px;
+    cursor: pointer;
+    font-family: var(--font-mono);
 }
 
-.red { background-color: #ff5f56; }
-.yellow { background-color: #ffbd2e; }
-.green { background-color: #27c93f; }
-
-.title {
-    color: #999;
-    font-size: 0.85rem;
-    flex-grow: 1;
-    text-align: center;
+#close-hud:hover {
+    background: var(--text-color);
+    color: #000;
 }
 
-/* Terminal Content */
-.terminal-body {
-    padding: 20px;
-    overflow-x: hidden;
-}
-
-/* Command Prompt Styling */
-.command-line {
-    margin-top: 25px;
-    margin-bottom: 15px;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-}
-
-.prompt {
-    margin-right: 10px;
-    white-space: nowrap;
-}
-
-.user { color: var(--prompt-user); font-weight: bold; }
-.loc { color: var(--prompt-loc); font-weight: bold; }
-.cmd { color: var(--cmd-color); font-weight: bold; }
-.cursor {
-    display: inline-block;
-    width: 8px;
-    height: 18px;
-    background-color: var(--text-color);
-    animation: blink 1s step-end infinite;
-    vertical-align: middle;
-    margin-left: 5px;
-}
-
-@keyframes blink { 50% { opacity: 0; } }
-
-/* Output Styling */
-.output {
-    padding-left: 20px;
-    margin-bottom: 20px;
+/* Reusing Terminal Styles for HUD Content */
+#hud-body {
     color: var(--text-color);
 }
 
-a { color: var(--link); text-decoration: none; border-bottom: 1px dotted var(--link); }
-a:hover { border-bottom: 1px solid var(--link); }
-
-/* JSON/Code Styling Helpers */
-.key { color: #9cdcfe; }
-.string { color: #ce9178; }
-.number { color: #b5cea8; }
-.boolean { color: #569cd6; }
-.bracket { color: #da70d6; }
-
-/* Profile Section */
-.profile-grid {
-    display: flex;
-    gap: 20px;
-    align-items: start;
-    flex-wrap: wrap;
-}
-
-.profile-pic {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    border: 2px solid #444;
-}
-
-/* List Styling */
-ul { list-style: none; }
-li { margin-bottom: 5px; position: relative; padding-left: 15px; }
-li::before { content: '>'; color: var(--comment); position: absolute; left: 0; font-weight: bold; }
-
-/* Experience Block */
 .job-block {
     margin-bottom: 25px;
-    border-left: 2px solid #333;
+    border-left: 2px solid var(--comment);
     padding-left: 15px;
 }
 
 .job-title { color: var(--highlight); font-weight: bold; font-size: 1.1em; }
 .company-name { color: var(--prompt-user); }
-.job-date { color: #666; font-size: 0.9em; margin-bottom: 8px; }
+.job-date { color: #888; font-size: 0.9em; margin-bottom: 8px; }
 
-/* Skills Tags */
-.skill-tag {
-    display: inline-block;
-    border: 1px solid #444;
-    padding: 2px 8px;
-    border-radius: 4px;
-    margin: 0 5px 5px 0;
-    font-size: 0.9em;
-    color: var(--number);
+ul { list-style: none; }
+li { margin-bottom: 5px; position: relative; padding-left: 15px; }
+li::before { content: '>'; color: var(--comment); position: absolute; left: 0; font-weight: bold; }
+
+a { color: var(--link); text-decoration: none; border-bottom: 1px dotted var(--link); }
+a:hover { border-bottom: 1px solid var(--link); }
+
+.key { color: #9cdcfe; }
+.string { color: #ce9178; }
+.number { color: #b5cea8; }
+.highlight { color: #fff; }
+
+.profile-grid {
+    display: flex;
+    gap: 20px;
+    align-items: start;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
 }
 
-/* Input Field Styling */
-#terminal-input {
-    background: transparent;
-    border: none;
+.profile-pic {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 2px solid var(--text-color);
+}
+
+/* Instructions */
+#instructions {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 50;
+    font-size: 0.8em;
     color: var(--text-color);
-    font-family: var(--font-mono);
-    font-size: 1rem;
-    width: 100%;
-    outline: none;
-    caret-color: var(--text-color);
+    opacity: 0.6;
+    pointer-events: none;
+    letter-spacing: 2px;
 }
 
-/* Print Styles */
-@media print {
-    body { background-color: #fff; color: #000; padding: 0; }
-    .terminal-window { box-shadow: none; border: none; max-width: 100%; }
-    .terminal-header { display: none; }
-    .prompt { display: none; }
-    #input-line { display: none; } /* Hide interactive input on print */
-    .command-line { 
-        border-bottom: 2px solid #000; 
-        margin-top: 30px; 
-        display: block; 
-    }
-    .cmd::before { content: "Section: "; font-weight: normal; color: #666; }
-    .cmd { color: #000; font-size: 1.2em; text-transform: uppercase; }
-    .output { padding-left: 0; color: #000; }
-    .job-block { border-left: 2px solid #ccc; }
-    .job-title, .company-name, .string, .key { color: #000 !important; }
-    a { color: #000; text-decoration: underline; border: none; }
-    .cursor { display: none; }
-    .profile-grid { display: block; text-align: left; }
-    .profile-pic { float: right; margin: 0 0 20px 20px; border: none; }
+/* Loader */
+#loader {
+    position: fixed;
+    inset: 0;
+    background: #000;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-@media (max-width: 600px) {
-    .profile-grid { flex-direction: column; text-align: center; }
-    .profile-pic { margin: 0 auto; }
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 2px solid var(--text-color);
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 15px;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Table for projects */
+table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+td { padding: 8px 0; border-bottom: 1px solid rgba(0, 255, 0, 0.1); }
+
+/* Matrix Effect compatibility */
+canvas#matrix-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    opacity: 0.2;
 }
