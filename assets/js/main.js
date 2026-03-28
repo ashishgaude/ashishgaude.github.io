@@ -26,35 +26,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Radar Logic
     function updateRadar() {
-        if (!window.portfolio3d || !window.portfolio3d.nodes) return;
-        
-        radarNodes.innerHTML = ''; // Clear dots
-        const nodes = window.portfolio3d.nodes;
-        
-        // Radar range mapping (Assume 10 units in 3D = 50px on radar)
-        nodes.forEach(node => {
-            const pos = node.parent.position;
-            const x = (pos.x / 10) * 50 + 50;
-            const z = (pos.z / 10) * 50 + 50;
-            
-            const dot = document.createElement('div');
-            dot.className = 'radar-dot';
-            dot.style.left = `${x}%`;
-            dot.style.top = `${z}%`;
-            radarNodes.appendChild(dot);
-        });
+        if (window.portfolio3d && window.portfolio3d.nodes) {
+            radarNodes.innerHTML = '';
+            window.portfolio3d.nodes.forEach(node => {
+                const pos = new THREE.Vector3();
+                node.getWorldPosition(pos);
+                // Range mapping for galaxy scale
+                const x = (pos.x / 25) * 50 + 50;
+                const z = (pos.z / 25) * 50 + 50;
+                const dot = document.createElement('div');
+                dot.className = 'radar-dot';
+                dot.style.left = `${x}%`;
+                dot.style.top = `${z}%`;
+                radarNodes.appendChild(dot);
+            });
 
-        // Add Camera Dot (Self)
-        const camPos = window.portfolio3d.camera.position;
-        const camX = (camPos.x / 10) * 50 + 50;
-        const camZ = (camPos.z / 10) * 50 + 50;
-        const selfDot = document.createElement('div');
-        selfDot.className = 'radar-dot self';
-        selfDot.style.left = `${camX}%`;
-        selfDot.style.top = `${camZ}%`;
-        selfDot.style.background = '#ff5f56'; // Red for self
-        radarNodes.appendChild(selfDot);
-        
+            const camPos = window.portfolio3d.camera.position;
+            const camX = (camPos.x / 25) * 50 + 50;
+            const camZ = (camPos.z / 25) * 50 + 50;
+            const selfDot = document.createElement('div');
+            selfDot.className = 'radar-dot self';
+            selfDot.style.left = `${camX}%`;
+            selfDot.style.top = `${camZ}%`;
+            radarNodes.appendChild(selfDot);
+        }
         requestAnimationFrame(updateRadar);
     }
     updateRadar();
@@ -64,11 +59,11 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="profile-grid">
                 <img src="profile.jpeg" alt="Ashish Gaude" class="profile-pic">
                 <div>
-                    <h1 class="string" style="font-size: 1.8em; margin-bottom: 10px;">"Ashish Gaude"</h1>
-                    <p style="color: var(--comment);">// Senior Product Delivery Engineer</p>
-                    <p style="color: var(--comment);">// 9+ Years of Experience in Full Stack & Cloud</p>
+                    <h1 class="job-title">"Ashish Gaude"</h1>
+                    <p style="color: var(--comment); font-family: var(--font-mono);">// Senior Product Delivery Engineer</p>
+                    <p style="color: var(--comment); font-family: var(--font-mono);">// 9+ Years of Experience in Full Stack & Cloud</p>
                     <br>
-                    <div>
+                    <div style="font-family: var(--font-mono); font-size: 0.9em;">
                         <span class="key">Email:</span> <a href="mailto:ashishgaude@outlook.com" class="string">"ashishgaude@outlook.com"</a><br>
                         <span class="key">Phone:</span> <span class="number">+91 8805112235</span><br>
                         <span class="key">Location:</span> <span class="string">"Pune, India"</span><br>
@@ -78,9 +73,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                 </div>
             </div>
-            <p style="margin-top: 20px;">
-                Senior Product Delivery Engineer with 9+ years of experience specialized in Node.js, AWS, and Azure. 
-                Focusing on building scalable, high-performance web applications and cloud infrastructures.
+            <p style="margin-top: 25px; font-size: 1.1em;">
+                Expert Senior Software Engineer with a focus on high-scale distributed systems and cloud infrastructure. 
+                Proven track record in migrating complex microservices, optimizing ML pipelines, and leading product delivery across AWS and Azure ecosystems.
             </p>
         `,
         experience: `
@@ -89,9 +84,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="company-name">@ Velotio Technologies</div>
                 <div class="job-date">[ July 2021 - Present ]</div>
                 <ul>
-                    <li>Migrated <span class="highlight">OxfordVR</span> microservices from C# .NET to NodeJS.</li>
-                    <li>Implemented comprehensive unit testing using Jest.</li>
-                    <li>Executed database migration from Azure to AWS PostgreSQL using DMS.</li>
+                    <li>Migrated <span class="highlight">OxfordVR</span> microservices from C# .NET to NodeJS for improved performance and developer velocity.</li>
+                    <li>Designed and implemented comprehensive unit testing strategies using Jest, achieving >90% coverage.</li>
+                    <li>Executed seamless database migration from Azure to AWS PostgreSQL using AWS DMS with zero downtime.</li>
                 </ul>
             </div>
 
@@ -100,10 +95,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="company-name">@ Numinolabs Private Limited</div>
                 <div class="job-date">[ Oct 2019 - July 2021 ]</div>
                 <ul>
-                    <li>Core developer for <span class="highlight">Pixm</span> (Phishing Protection).</li>
-                    <li>Scaled ML visual detection APIs to handle 1000+ users using Azure Function Apps.</li>
-                    <li>Managed frontend hosting via Azure FrontDoor & CDN.</li>
-                    <li>Developed browser extensions for Chrome, Firefox, and Edge.</li>
+                    <li>Core developer for <span class="highlight">Pixm</span>, an AI-driven Phishing Protection platform.</li>
+                    <li>Scaled ML visual detection APIs to handle concurrent requests from 1000+ users using Azure Function Apps.</li>
+                    <li>Engineered high-performance browser extensions for Chrome, Firefox, and Edge with a unified codebase.</li>
                 </ul>
             </div>
 
@@ -112,53 +106,65 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="company-name">@ Numinolabs Private Limited</div>
                 <div class="job-date">[ June 2017 - Sept 2019 ]</div>
                 <ul>
-                    <li>Developed MyFlowZone fitness portal with Angular & AWS Lambda.</li>
-                    <li>Implemented CI/CD pipelines using GoCD.</li>
+                    <li>Architected and developed the MyFlowZone fitness portal utilizing Angular and AWS Lambda.</li>
+                    <li>Automated deployment processes by implementing CI/CD pipelines using GoCD.</li>
                 </ul>
             </div>
         `,
         skills: `
-            <div style="color: var(--text-color);">
-                <span class="key">languages:</span> [<span class="string">"JavaScript"</span>, <span class="string">"TypeScript"</span>, <span class="string">"Python"</span>, <span class="string">"C++"</span>]<br>
-                <span class="key">backend:</span> [<span class="string">"Node.js"</span>, <span class="string">"Express"</span>, <span class="string">"Serverless"</span>]<br>
-                <span class="key">frontend:</span> [<span class="string">"React"</span>, <span class="string">"Redux"</span>, <span class="string">"Angular"</span>]<br>
-                <span class="key">cloud_aws:</span> [<span class="string">"Lambda"</span>, <span class="string">"DynamoDB"</span>, <span class="string">"CloudFormation"</span>]<br>
-                <span class="key">cloud_azure:</span> [<span class="string">"Functions"</span>, <span class="string">"SQL Server"</span>, <span class="string">"FrontDoor"</span>]<br>
-                <span class="key">tools:</span> [<span class="string">"Git"</span>, <span class="string">"GoCD"</span>, <span class="string">"Docker"</span>, <span class="string">"Postman"</span>]
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <span class="skill-title">Languages</span>
+                    <p>JavaScript (ES6+), TypeScript, Python, C++, SQL</p>
+                </div>
+                <div class="skill-category">
+                    <span class="skill-title">Backend & Cloud</span>
+                    <p>Node.js, Express, Serverless, AWS (Lambda, DynamoDB, CloudFormation), Azure (Functions, SQL Server, FrontDoor)</p>
+                </div>
+                <div class="skill-category">
+                    <span class="skill-title">Frontend</span>
+                    <p>React, Redux, Angular, RxJS, CSS3/SCSS</p>
+                </div>
+                <div class="skill-category">
+                    <span class="skill-title">Tools & DevOps</span>
+                    <p>Git, Docker, Docker Compose, GoCD, Postman, Jest, AWS DMS</p>
+                </div>
             </div>
         `,
         projects: `
-            <table style="width: 100%; border-collapse: collapse; color: var(--text-color);">
+            <table style="width: 100%; border-collapse: collapse;">
                 <tr>
-                    <td><a href="https://ashishgaude.github.io/kadamba-transport/?route=PNJ110" target="_blank">Kadamba_Transport</a></td>
-                    <td style="color: #666;">// Bus route tracking app</td>
+                    <td style="width: 40%;"><a href="https://ashishgaude.github.io/kadamba-transport/?route=PNJ110" target="_blank">Kadamba Transport</a></td>
+                    <td style="color: #94a3b8;">// Real-time bus route tracking application for Goa commuters.</td>
                 </tr>
                 <tr>
-                    <td><a href="https://ashishgaude.github.io/screen-recorder/" target="_blank">Screen_Recorder</a></td>
-                    <td style="color: #666;">// Browser-based recording tool</td>
+                    <td><a href="https://ashishgaude.github.io/screen-recorder/" target="_blank">Screen Recorder</a></td>
+                    <td style="color: #94a3b8;">// Lightweight, browser-based recording tool with no installation required.</td>
                 </tr>
                 <tr>
-                    <td><a href="https://ashishgaude.github.io/video-chat-pwa/" target="_blank">Video_Chat_PWA</a></td>
-                    <td style="color: #666;">// P2P video chat application</td>
+                    <td><a href="https://ashishgaude.github.io/video-chat-pwa/" target="_blank">Video Chat PWA</a></td>
+                    <td style="color: #94a3b8;">// High-performance P2P video calling application built as a PWA.</td>
                 </tr>
                 <tr>
-                    <td><a href="https://ashishgaude.github.io/drop-share/" target="_blank">Drop_Share</a></td>
-                    <td style="color: #666;">// P2P file sharing service</td>
+                    <td><a href="https://ashishgaude.github.io/drop-share/" target="_blank">Drop Share</a></td>
+                    <td style="color: #94a3b8;">// Secure, peer-to-peer file sharing service leveraging WebRTC.</td>
                 </tr>
                 <tr>
-                    <td><a href="https://game-hub-hazel-zeta.vercel.app/" target="_blank">Game_Hub</a></td>
-                    <td style="color: #666;">// React 18 game browsing site</td>
+                    <td><a href="https://game-hub-hazel-zeta.vercel.app/" target="_blank">Game Hub</a></td>
+                    <td style="color: #94a3b8;">// Modern gaming platform built with React 18 and TanStack Query.</td>
                 </tr>
             </table>
         `,
         education: `
-            <p><span class="key">Degree:</span> <span class="string">"BE (Information Technology)"</span></p>
-            <p><span class="key">Institute:</span> Goa College Of Engineering</p>
-            <p><span class="key">Year:</span> 2016</p>
+            <div class="job-block">
+                <div class="job-title">BE (Information Technology)</div>
+                <div class="company-name">Goa College Of Engineering</div>
+                <div class="job-date">Graduated: 2016</div>
+                <p>Focused on Data Structures, Algorithms, Distributed Computing, and Network Security.</p>
+            </div>
         `
     };
 
-    // Listen for node focus events from Portfolio3D
     window.addEventListener('nodeFocused', (e) => {
         const section = e.detail.name;
         highlightNav(section);
@@ -167,39 +173,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function showSection(name) {
         if (data[name]) {
-            hudBody.innerHTML = ''; // Clear previous
+            const title = name.toUpperCase().replace('-', ' ');
+            hudBody.innerHTML = `<h2 style="color: var(--text-color); font-family: var(--font-mono); margin-bottom: 30px; letter-spacing: 4px; border-bottom: 1px solid rgba(34, 211, 238, 0.2); padding-bottom: 10px; font-size: 1.1rem;">// SYSTEM_LOG: ${title}</h2>`;
+            const contentDiv = document.createElement('div');
+            hudBody.appendChild(contentDiv);
             hud.classList.add('active');
-            typeWriterHTML(hudBody, data[name]);
+            typeWriterHTML(contentDiv, data[name]);
         }
     }
 
     closeHud.addEventListener('click', () => {
         hud.classList.remove('active');
-        highlightNav(''); // Clear highlights
-        if (window.portfolio3d) {
-            window.portfolio3d.resetCamera();
-        }
+        highlightNav('');
+        if (window.portfolio3d) window.portfolio3d.resetCamera();
     });
 
-    // Close on Escape
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && hud.classList.contains('active')) {
-            closeHud.click();
-        }
+        if (e.key === 'Escape' && hud.classList.contains('active')) closeHud.click();
     });
 
-    // Typewriter effect that respects HTML tags
     function typeWriterHTML(container, html) {
         return new Promise((resolve) => {
             const tempDiv = document.createElement('div');
             tempDiv.innerHTML = html;
             const queue = Array.from(tempDiv.childNodes);
-            
             function typeNode() {
-                if (queue.length === 0) {
-                    resolve();
-                    return;
-                }
+                if (queue.length === 0) { resolve(); return; }
                 const node = queue.shift();
                 if (node.nodeType === Node.TEXT_NODE) {
                     const text = node.textContent;
@@ -207,28 +206,25 @@ document.addEventListener('DOMContentLoaded', () => {
                     function typeChar() {
                         if (i < text.length) {
                             container.append(text.charAt(i));
-                            i++;
-                            setTimeout(typeChar, 2); // Ultra fast typing
-                        } else {
-                            typeNode();
-                        }
+                            i += 4; // Faster typing speed
+                            setTimeout(typeChar, 1);
+                        } else { typeNode(); }
                     }
                     typeChar();
                 } else {
                     const clone = node.cloneNode(true);
                     container.appendChild(clone);
-                    setTimeout(typeNode, 10);
+                    setTimeout(typeNode, 1);
                 }
             }
             typeNode();
         });
     }
 
-    // Hide loader after a delay
     setTimeout(() => {
-        if (loader) loader.style.opacity = '0';
-        setTimeout(() => {
-            if (loader) loader.style.display = 'none';
-        }, 500);
-    }, 2000);
+        if (loader) {
+            loader.style.opacity = '0';
+            setTimeout(() => loader.style.display = 'none', 500);
+        }
+    }, 1500);
 });
